@@ -1,5 +1,5 @@
 {
-  "name": "conference-bot",
+  "name": "hk-bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,8 +14,10 @@
   "dependencies": {
     "botbuilder": "~4.8.0",
     "botbuilder-ai": "~4.8.0",
-    "dotenv": "^8.0.0",
-    "restify": "~8.3.3"
+    "botbuilder-azure": "~4.8.0",
+    "botbuilder-dialogs": "~4.8.0",
+    "dotenv": "^8.2.0",
+    "restify": "~8.4.0"
   },
   "devDependencies": {
     "eslint": "^6.0.1",

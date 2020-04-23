@@ -1,0 +1,24 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Image",
+      "url": "https://designmanual.kristiania.no/wp-content/uploads/2015/12/hk-larger-english.svg",
+      "size": "stretch"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Website",
+      "url": "https://www.kristiania.no/en/"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "Contact us",
+      "url": "https://www.kristiania.no/en/about-kristiania/contact-us/"
+    }
+  ]
+}

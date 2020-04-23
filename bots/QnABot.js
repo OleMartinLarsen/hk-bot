@@ -1,5 +1,6 @@
-const { ActivityHandler } = require('botbuilder');
+const { ActivityHandler, CardFactory } = require('botbuilder');
 const { QnAMaker } = require('botbuilder-ai');
+const WelcomeCard = require('./resources/welcomeCard.json');
 
 class QnABot extends ActivityHandler {
   constructor() {
@@ -17,14 +18,17 @@ class QnABot extends ActivityHandler {
       );
     }
 
-    // If a new user is added to the conversation, send them a greeting message
+    // Method for when a new user gets added, displays the WelcomeCard
     this.onMembersAdded(async (context, next) => {
       const membersAdded = context.activity.membersAdded;
       for (let cnt = 0; cnt < membersAdded.length; cnt++) {
         if (membersAdded[cnt].id !== context.activity.recipient.id) {
+          const welcomeCard = CardFactory.adaptiveCard(WelcomeCard);
+          await context.sendActivity({ attachments: [welcomeCard] });
           await context.sendActivity(
-            'Welcome to Høyskolen Kristiania, what can i help you with?'
+            'Hi! I am a chatbot from Kristiania University College, i will try to help you to the best of my ability.'
           );
+          await context.sendActivity('What can i help you with?');
         }
       }
 
@@ -52,7 +56,37 @@ class QnABot extends ActivityHandler {
 
         // If an answer was received from QnA Maker, send the answer back to the user.
         if (qnaResults[0]) {
-          await context.sendActivity(qnaResults[0].answer);
+          const {
+            answer,
+            context: { prompts },
+          } = qnaResults[0];
+
+          let reply;
+          if (prompts.length) {
+            const card = {
+              type: 'AdaptiveCard',
+              body: [
+                {
+                  type: 'TextBlock',
+                  text: answer,
+                  wrap: true,
+                },
+              ],
+              actions: prompts.map(({ displayText }) => ({
+                type: 'Action.Submit',
+                title: displayText,
+                data: displayText,
+              })),
+              $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+              version: '1.1',
+            };
+
+            reply = { attachments: [CardFactory.adaptiveCard(card)] };
+          } else {
+            reply = answer;
+          }
+
+          await context.sendActivity(reply);
 
           // If no answers were returned from QnA Maker, reply with help.
         } else {
