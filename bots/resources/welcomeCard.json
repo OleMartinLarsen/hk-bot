@@ -7,6 +7,15 @@
       "type": "Image",
       "url": "https://designmanual.kristiania.no/wp-content/uploads/2015/12/hk-larger-english.svg",
       "size": "stretch"
+    },
+    {
+      "type": "TextBlock",
+      "spacing": "medium",
+      "size": "default",
+      "weight": "bolder",
+      "text": "Hi👋 I am a chatbot from Kristiania University College, i will try to help you to the best of my ability.",
+      "wrap": true,
+      "maxLines": 0
     }
   ],
   "actions": [

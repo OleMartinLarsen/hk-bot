@@ -25,9 +25,6 @@ class QnABot extends ActivityHandler {
         if (membersAdded[cnt].id !== context.activity.recipient.id) {
           const welcomeCard = CardFactory.adaptiveCard(WelcomeCard);
           await context.sendActivity({ attachments: [welcomeCard] });
-          await context.sendActivity(
-            'Hi! I am a chatbot from Kristiania University College, i will try to help you to the best of my ability.'
-          );
           await context.sendActivity('What can i help you with?');
         }
       }
