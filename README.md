@@ -2,6 +2,9 @@
 
 This is a chatbot developed for the MA230 exam.
 
+## NB
+This bot will no longer work since i am not paying for Azure anymore.
+
 ## Installation
 
 To use the bot you need to have node and npm installed. When installed run in the terminal:
